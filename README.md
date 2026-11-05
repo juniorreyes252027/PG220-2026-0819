@@ -17,3 +17,9 @@ Las muestras no se ordenan antes de contar.
 
 ## Estado
 Etapa 1: estructura y plan. El cálculo se implementa en las siguientes etapas.
+
+### Avance etapa 2
+Implementados: lectura con validación, `calcular`, `total_rec` y líneas de resultado + `TOTAL`.
+Pendiente: `ordenar`, `buscar`, `ORDER`, `FIND` y las pruebas completas.
+Verificado a mano con `pruebas/publica1.in` (esperado parcial: `30 ABA11 0 1`, `10 LIBRO9 3 0`, `TOTAL 3`)
+y con `pruebas/publica6.in` (esperado `ERROR`).
