@@ -15,11 +15,15 @@ Las muestras no se ordenan antes de contar.
 - `main.c`: programa principal y funciones.
 - `plan.md`: análisis, pseudocódigo y decisiones.
 
-## Estado
-Etapa 1: estructura y plan. El cálculo se implementa en las siguientes etapas.
+## Compilación y ejecución
+```
+gcc -std=c11 -Wall -Wextra -Wpedantic main.c -o reto
+./reto < pruebas/publica1.in            (Linux/macOS)
+reto.exe < pruebas\publica1.in          (Windows cmd)
+py evaluar.py publicas.json reto.exe    (casos públicos)
+py correr_pruebas.py reto.exe           (todas las pruebas de la carpeta pruebas)
+```
 
-### Avance etapa 2
-Implementados: lectura con validación, `calcular`, `total_rec` y líneas de resultado + `TOTAL`.
-Pendiente: `ordenar`, `buscar`, `ORDER`, `FIND` y las pruebas completas.
-Verificado a mano con `pruebas/publica1.in` (esperado parcial: `30 ABA11 0 1`, `10 LIBRO9 3 0`, `TOTAL 3`)
-y con `pruebas/publica6.in` (esperado `ERROR`).
+## Estado
+Etapa 3: programa completo (`ORDER` y `FIND` incluidos) y pruebas públicas y propias.
+Falta la media de scores y la documentación final.

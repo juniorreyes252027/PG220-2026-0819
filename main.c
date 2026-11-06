@@ -40,6 +40,53 @@ int total_rec(const Registro v[], int n)
     return v[n - 1].score + total_rec(v, n - 1);
 }
 
+/* true si a debe ir antes que b segun el criterio */
+static int va_antes(const Registro *a, const Registro *b, int criterio)
+{
+    if (criterio == 1) {
+        return a->id < b->id;
+    }
+    if (a->score != b->score) {
+        return a->score > b->score;
+    }
+    return a->id < b->id;
+}
+
+void ordenar(Registro v[], int n, int criterio)
+{
+    int i, j;
+    Registro clave;
+
+    for (i = 1; i < n; i++) {
+        clave = v[i];
+        j = i - 1;
+        while (j >= 0 && va_antes(&clave, &v[j], criterio)) {
+            v[j + 1] = v[j];
+            j--;
+        }
+        v[j + 1] = clave;
+    }
+}
+
+int buscar(const Registro v[], int n, int id)
+{
+    int bajo = 0;
+    int alto = n - 1;
+    int medio;
+
+    while (bajo <= alto) {
+        medio = bajo + (alto - bajo) / 2;
+        if (v[medio].id == id) {
+            return medio;
+        } else if (v[medio].id < id) {
+            bajo = medio + 1;
+        } else {
+            alto = medio - 1;
+        }
+    }
+    return -1;
+}
+
 /* ---------- Validacion auxiliar ---------- */
 
 static int nombre_valido(const char *s)
@@ -95,7 +142,8 @@ int main(void)
 {
     int muestras[MAX_UNIDADES][MAX_MUESTRAS];
     Registro registros[MAX_UNIDADES];
-    int n, m, q, i, total;
+    Registro copia[MAX_UNIDADES];
+    int n, m, q, i, total, pos;
 
     if (!leer_entrada(&n, &m, &q, registros, muestras)) {
         printf("ERROR\n");
@@ -118,6 +166,18 @@ int main(void)
     total = total_rec(registros, n);
     printf("TOTAL %d\n", total);
 
-    /* Pendiente (etapa 3): ORDER y FIND */
+    /* ORDER: copia ordenada por score desc / id asc */
+    for (i = 0; i < n; i++) copia[i] = registros[i];
+    ordenar(copia, n, 0);
+    printf("ORDER");
+    for (i = 0; i < n; i++) printf(" %d", copia[i].id);
+    printf("\n");
+
+    /* FIND: copia ordenada por id y busqueda binaria */
+    for (i = 0; i < n; i++) copia[i] = registros[i];
+    ordenar(copia, n, 1);
+    pos = buscar(copia, n, q);
+    printf("FIND %d %d\n", q, (pos >= 0) ? copia[pos].score : -1);
+
     return 0;
 }
