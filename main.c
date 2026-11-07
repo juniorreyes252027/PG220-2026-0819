@@ -87,6 +87,11 @@ int buscar(const Registro v[], int n, int id)
     return -1;
 }
 
+double media_scores(int total, int n)
+{
+    return total / (double)n;
+}
+
 /* ---------- Validacion auxiliar ---------- */
 
 static int nombre_valido(const char *s)
@@ -144,6 +149,7 @@ int main(void)
     Registro registros[MAX_UNIDADES];
     Registro copia[MAX_UNIDADES];
     int n, m, q, i, total, pos;
+    double media;
 
     if (!leer_entrada(&n, &m, &q, registros, muestras)) {
         printf("ERROR\n");
@@ -178,6 +184,9 @@ int main(void)
     ordenar(copia, n, 1);
     pos = buscar(copia, n, q);
     printf("FIND %d %d\n", q, (pos >= 0) ? copia[pos].score : -1);
+
+    media = media_scores(total, n);   /* solo para el README, no se imprime */
+    (void)media;
 
     return 0;
 }

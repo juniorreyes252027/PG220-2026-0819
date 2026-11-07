@@ -42,4 +42,7 @@ void ordenar(Registro v[], int n, int criterio);
    Devuelve la posicion o -1 si no existe. */
 int buscar(const Registro v[], int n, int id);
 
+/* Media de los scores (se documenta en el README, no se imprime). */
+double media_scores(int total, int n);
+
 #endif /* RETO_H */
